@@ -9,8 +9,4 @@ import lombok.*;
 @Builder
 public class CustomerRegisterDto {
     private String serialNumber;
-
-    private String name;
-
-    private String phoneNumber;
 }

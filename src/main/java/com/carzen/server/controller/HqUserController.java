@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @Slf4j
 public class HqUserController {
+
     private final HqUserService hqUserService;
 
     @Autowired

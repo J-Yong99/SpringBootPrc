@@ -35,16 +35,16 @@ public class CustomerController {
     public List<Customer> getUsers(){
         CustomerUserDetails customerDetails = (CustomerUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 접속자의 정보를 SecurityContextHolder에서 가져옴
-        System.out.println("customerDetails.getPhoneNumber() = " + customerDetails.getPhoneNumber());
+        System.out.println("customerDetails.getPhoneNumber() = " + customerDetails.getSerialNumber());
         return customerRepository.findAll();
     }
 
-    @GetMapping("/customer/sort")
-    public List<Customer> getCustomers(
-            @RequestBody getCustomerRequestDto requestBody
-    )throws Exception{
-        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(),requestBody.getName(),requestBody.getPhoneNumber(),requestBody.getRole());
-    }
+//    @GetMapping("/customer/sort")
+//    public List<Customer> getCustomers(
+//            @RequestBody getCustomerRequestDto requestBody
+//    )throws Exception{
+//        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(),requestBody.getName(),requestBody.getPhoneNumber(),requestBody.getRole());
+//    }
 
     @PostMapping("/customer1")
     public String saveUser(

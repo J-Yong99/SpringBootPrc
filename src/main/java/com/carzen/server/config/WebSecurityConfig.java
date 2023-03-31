@@ -58,6 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST,"/hqUser").permitAll()
+                    .antMatchers(HttpMethod.POST, "/reservation").hasRole("HQA")
                     .antMatchers(HttpMethod.POST, "/login").permitAll()
                     .antMatchers(HttpMethod.GET, "/hqUser").hasRole("HQA")
                     .antMatchers(HttpMethod.POST, "/customer1").permitAll()
@@ -66,7 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.POST, "/device").permitAll()
                     .antMatchers(HttpMethod.GET, "/device").hasRole("HQA")
                     .antMatchers("/customer/**").hasRole("CUSTOMERA")
-
                     .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)

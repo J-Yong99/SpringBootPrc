@@ -1,4 +1,4 @@
-package com.carzen.server.dto;
+package com.carzen.server.dto.customer;
 
 import com.carzen.server.domain.CustomerRole;
 import lombok.*;

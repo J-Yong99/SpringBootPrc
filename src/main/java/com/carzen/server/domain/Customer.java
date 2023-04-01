@@ -21,13 +21,13 @@ public class Customer {
     private String serialNumber;
     // 시리얼 번호
 
-//    @Column(name = "name", nullable = true, unique = false)
-//    private String name;
-//    // 고객 이름
-//
-//    @Column(name = "phone_number", nullable = true, unique = false)
-//    private String phoneNumber;
-//    // 고객 전화번호
+    @Column(name = "name", nullable = true, unique = false)
+    private String name;
+    // 고객 이름
+
+    @Column(name = "phone_number", nullable = true, unique = false)
+    private String phoneNumber;
+    // 고객 전화번호
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, unique = false)

@@ -2,8 +2,8 @@ package com.carzen.server.controller;
 
 import com.carzen.server.domain.Customer;
 import com.carzen.server.domain.CustomerRole;
-import com.carzen.server.dto.CustomerRegisterDto;
-import com.carzen.server.dto.getCustomerRequestDto;
+import com.carzen.server.dto.customer.CustomerRegisterDto;
+import com.carzen.server.dto.customer.getCustomerRequestDto;
 import com.carzen.server.repository.CustomerRepository;
 import com.carzen.server.security.userdetails.CustomerUserDetails;
 import com.carzen.server.service.CustomerService;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,16 +34,16 @@ public class CustomerController {
     public List<Customer> getUsers(){
         CustomerUserDetails customerDetails = (CustomerUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         // 접속자의 정보를 SecurityContextHolder에서 가져옴
-        System.out.println("customerDetails.getPhoneNumber() = " + customerDetails.getSerialNumber());
+        System.out.println("customerDetails.getPhoneNumber() = " + customerDetails.getPhoneNumber());
         return customerRepository.findAll();
     }
 
-//    @GetMapping("/customer/sort")
-//    public List<Customer> getCustomers(
-//            @RequestBody getCustomerRequestDto requestBody
-//    )throws Exception{
-//        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(),requestBody.getName(),requestBody.getPhoneNumber(),requestBody.getRole());
-//    }
+    @GetMapping("/customer/sort")
+    public List<Customer> getCustomers(
+            @RequestBody getCustomerRequestDto requestBody
+    )throws Exception{
+        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(),requestBody.getName(),requestBody.getPhoneNumber(),requestBody.getRole());
+    }
 
     @PostMapping("/customer1")
     public String saveUser(

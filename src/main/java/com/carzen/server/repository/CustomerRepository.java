@@ -13,11 +13,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-@Repository
+
 public interface CustomerRepository extends JpaRepository<Customer, Long>, CustomerRepositoryCustom{
 
     Optional<Customer> findBySerialNumber(String serialNumber);
-//    List<Customer> findBySerialNumberAndNameAndPhoneNumberAndRole(String serialNumber, String name, String phoneNumber, CustomerRole role);
     @Override
     List<Customer> findAll();
 

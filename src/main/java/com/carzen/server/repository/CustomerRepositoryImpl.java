@@ -22,14 +22,12 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom{
 //        this.jpaQueryFactory = new JPAQueryFactory(entityManager);
 //    }
     @Override
-    public List<Customer> searchCustomers(Long id, String serialNumber, String name, String phoneNumber, CustomerRole role) {
+    public List<Customer> searchCustomers(Long id, String serialNumber, CustomerRole role) {
         QCustomer qCustomer = QCustomer.customer;
 
         return jpaQueryFactory.selectFrom(qCustomer)
                 .where(
                         getSerialNumberExpression(qCustomer, serialNumber),
-//                        getNameExpression(qCustomer, name),
-//                        getPhoneNumberExpression(qCustomer, phoneNumber),
                         getRoleExpression(qCustomer, role)
                 )
                 .fetch();

@@ -1,11 +1,8 @@
 package com.carzen.server.service;
 
 import com.carzen.server.domain.Company;
-import com.carzen.server.domain.Customer;
-import com.carzen.server.domain.CustomerRole;
 import com.carzen.server.domain.Device;
 import com.carzen.server.dto.CompanyRegisterDto;
-import com.carzen.server.dto.CustomerRegisterDto;
 import com.carzen.server.repository.CompanyRepository;
 import com.carzen.server.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Service
 @Transactional

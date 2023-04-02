@@ -3,8 +3,7 @@ package com.carzen.server.controller;
 
 import com.carzen.server.domain.RsvInfo;
 import com.carzen.server.dto.ReservationDto;
-import com.carzen.server.dto.ReservationRegisterDto;
-import com.carzen.server.dto.ReservationRegisterResponseDto;
+
 import com.carzen.server.security.userdetails.CompanyUserDetails;
 import com.carzen.server.service.RsvInfoService;
 import lombok.Getter;

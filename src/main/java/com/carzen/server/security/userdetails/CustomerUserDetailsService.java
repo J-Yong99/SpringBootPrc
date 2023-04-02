@@ -22,9 +22,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
         Customer customer = customerRepository.findBySerialNumber(serialNumber).orElseThrow(() -> new UsernameNotFoundException("CustomerUserDetailsService : can not find serial number : " + serialNumber));
         return new CustomerUserDetails(
                 customer.getId(),
-                customer.getName(),
                 customer.getSerialNumber(),
-                customer.getPhoneNumber(),
                 customer.getRole()
         );
     }

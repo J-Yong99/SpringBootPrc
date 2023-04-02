@@ -33,11 +33,9 @@ public class CustomerUserDetails implements UserDetails {
     // 사용자의 권한 목록
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomerUserDetails(Long id, String userName, String serialNumber, String phoneNumber, CustomerRole role) {
+    public CustomerUserDetails(Long id,String serialNumber, CustomerRole role) {
         this.id = id;
-        this.userName = userName;
         this.serialNumber = serialNumber;
-        this.phoneNumber = phoneNumber;
         this.role = role;
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role.getValue()));
@@ -57,7 +55,7 @@ public class CustomerUserDetails implements UserDetails {
      */
     @Override
     public String getPassword() {
-        return phoneNumber;
+        return null;
     }
 
     /*
@@ -65,7 +63,7 @@ public class CustomerUserDetails implements UserDetails {
      */
     @Override
     public String getUsername() {
-        return userName;
+        return null;
     }
 
     /*

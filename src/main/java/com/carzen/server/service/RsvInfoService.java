@@ -3,7 +3,7 @@ package com.carzen.server.service;
 import com.carzen.server.domain.*;
 import com.carzen.server.dto.CompanyRegisterDto;
 import com.carzen.server.dto.ReservationDto;
-import com.carzen.server.dto.ReservationRegisterDto;
+
 import com.carzen.server.repository.CarIndRepository;
 import com.carzen.server.repository.CompanyRepository;
 import com.carzen.server.repository.CustomerRepository;

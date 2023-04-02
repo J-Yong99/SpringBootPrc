@@ -42,7 +42,7 @@ public class CustomerController {
     public List<Customer> getCustomers(
             @RequestBody getCustomerRequestDto requestBody
     )throws Exception{
-        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(),requestBody.getName(),requestBody.getPhoneNumber(),requestBody.getRole());
+        return customerService.getCustomer(requestBody.getId(), requestBody.getSerialNumber(), requestBody.getRole());
     }
 
     @PostMapping("/customer1")

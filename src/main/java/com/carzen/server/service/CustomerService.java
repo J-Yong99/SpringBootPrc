@@ -28,23 +28,19 @@ public class CustomerService {
                  customer = Customer.builder()
                 .role(role)
                 .serialNumber(request.getSerialNumber())
-                .name(null)
-                .phoneNumber(null)
                 .build();
         }else{
             customer = optionalCustomer.get();
             customer.setRole(role);
-            customer.setName(request.getName());
-            customer.setPhoneNumber(request.getPhoneNumber());
         }
         customerRepository.save(customer);
     }
 
-    public List<Customer> getCustomer(Long id, String serialNumber, String name, String phoneNumber, CustomerRole role) {
-        if (serialNumber == null && name == null && phoneNumber == null && role == null) {
+    public List<Customer> getCustomer(Long id, String serialNumber, CustomerRole role) {
+        if (serialNumber == null && role == null) {
             return customerRepository.findAll();
         } else {
-            return customerRepository.searchCustomers(id, serialNumber, name, phoneNumber, role);
+            return customerRepository.searchCustomers(id, serialNumber, role);
         }
     }
 //    public List<Customer> searchCustomers(String name, String phoneNumber, CustomerRole role) {

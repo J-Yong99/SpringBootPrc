@@ -14,11 +14,6 @@ import javax.persistence.Enumerated;
 public class getCustomerRequestDto {
     private Long id;
     private String serialNumber;
-
-    private String name;
-
-    private String phoneNumber;
-
     @Enumerated(EnumType.STRING)
     private CustomerRole role;
 }

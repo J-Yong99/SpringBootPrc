@@ -28,8 +28,8 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom{
         return jpaQueryFactory.selectFrom(qCustomer)
                 .where(
                         getSerialNumberExpression(qCustomer, serialNumber),
-//                        getNameExpression(qCustomer, name),
-//                        getPhoneNumberExpression(qCustomer, phoneNumber),
+                        getNameExpression(qCustomer, name),
+                        getPhoneNumberExpression(qCustomer, phoneNumber),
                         getRoleExpression(qCustomer, role)
                 )
                 .fetch();
@@ -42,19 +42,19 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom{
         return null;
     }
 
-//    private BooleanExpression getNameExpression(QCustomer qCustomer, String name) {
-//        if (name != null && !name.isEmpty()) {
-//            return qCustomer.name.eq(name);
-//        }
-//        return null;
-//    }
+    private BooleanExpression getNameExpression(QCustomer qCustomer, String name) {
+        if (name != null && !name.isEmpty()) {
+            return qCustomer.name.eq(name);
+        }
+        return null;
+    }
 
-//    private BooleanExpression getPhoneNumberExpression(QCustomer qCustomer, String phoneNumber) {
-//        if (phoneNumber != null && !phoneNumber.isEmpty()) {
-//            return qCustomer.phoneNumber.eq(phoneNumber);
-//        }
-//        return null;
-//    }
+    private BooleanExpression getPhoneNumberExpression(QCustomer qCustomer, String phoneNumber) {
+        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+            return qCustomer.phoneNumber.eq(phoneNumber);
+        }
+        return null;
+    }
 
     private BooleanExpression getRoleExpression(QCustomer qCustomer, CustomerRole role) {
         if (role != null) {

@@ -1,10 +1,6 @@
 package com.carzen.server.controller;
 
-import com.carzen.server.domain.Company;
-import com.carzen.server.domain.CustomerRole;
 import com.carzen.server.dto.CompanyRegisterDto;
-import com.carzen.server.dto.CustomerRegisterDto;
-import com.carzen.server.repository.CompanyRepository;
 import com.carzen.server.service.CompanyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +35,5 @@ public class CompanyController {
     public ResponseEntity<?> getCompanies(){
         return ResponseEntity.ok(companyService.findCompanyAll());
     }
-
-
 
 }

@@ -10,7 +10,10 @@ import java.util.List;
 
 
 public interface RsvInfoRepositoryCustom {
-    List<RsvInfo> searchRsv(Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDate, Long inspectTime, String customerName, String customerPhoneNumber);
+    List<RsvInfo> searchRsv(Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDateStart, LocalDate yearDateEnd, Long inspectTime, String customerName, String customerPhoneNumber, String carName);
 
-    Page<RsvInfo> searchRsvWithPaging(Pageable pageable, Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDate, Long inspectTime, String customerName, String customerPhoneNumber);
+    Page<RsvInfo> searchRsvWithPaging(Pageable pageable, Long id, Long carIndId, Long companyId, Long customerId,
+                                      Long paymentInfoId, String rsvStatus, String insStatus,
+                                      LocalDate yearDateStart, LocalDate yearDateEnd, Long inspectTime, String customerName,
+                                      String customerPhoneNumber, String carName);
 }

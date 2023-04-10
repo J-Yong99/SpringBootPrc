@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class CustomerService {
 
     @Autowired
@@ -21,6 +20,7 @@ public class CustomerService {
     }
     private CustomerRepository customerRepository;
 
+    @Transactional
     public void join(CustomerRegisterDto request, CustomerRole role) throws Exception{
         Optional<Customer> optionalCustomer = customerRepository.findBySerialNumber(request.getSerialNumber());
         Customer customer;

@@ -3,6 +3,7 @@ package com.carzen.server.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,7 +25,7 @@ public class Report {
     // 점검지 ID
 
     @Column(name = "expire_date", nullable = false, unique = false)
-    private LocalDateTime expireDate;
+    private LocalDate expireDate;
     // 보증기한 = 만료일
 
     @Column(name = "fix_count", nullable = false, unique = false)

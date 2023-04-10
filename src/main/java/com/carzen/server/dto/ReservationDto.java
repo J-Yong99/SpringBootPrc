@@ -40,11 +40,10 @@ public class ReservationDto {
                 .carIndId(reservation.getCarInd() != null ? reservation.getCarInd().getId() : null)
                 .companyId(reservation.getCompany() != null ? reservation.getCompany().getId() : null)
                 .customerId(reservation.getCustomer() != null ? reservation.getCustomer().getId() : null)
-                .paymentInfoId(reservation.getPaymentInfo() != null ? reservation.getPaymentInfo().getId() : null)
                 .rsvStatus(reservation.getRsvStatus())
                 .insStatus(reservation.getInsStatus())
                 .yearDate(reservation.getYearDate())
-                .inspectTime(reservation.getInpectTime())
+                .inspectTime(reservation.getInspectTime())
                 .customerName(reservation.getCustomerName())
                 .customerPhoneNumber(reservation.getCustomerPhoneNumber());
 
@@ -58,11 +57,10 @@ public class ReservationDto {
                 .carInd(carIndId != null ? CarInd.builder().id(carIndId).build() : null)
                 .company(companyId != null ? Company.builder().id(companyId).build() : null)
                 .customer(customerId != null ? Customer.builder().id(customerId).build() : null)
-                .paymentInfo(paymentInfoId != null ? PaymentInfo.builder().id(paymentInfoId).build() : null)
                 .rsvStatus(rsvStatus)
                 .insStatus(insStatus)
                 .yearDate(yearDate)
-                .inpectTime(inspectTime)
+                .inspectTime(inspectTime)
                 .customerName(customerName)
                 .customerPhoneNumber(customerPhoneNumber)
                 .build();

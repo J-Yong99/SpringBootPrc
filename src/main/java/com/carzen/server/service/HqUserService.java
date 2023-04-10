@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Transactional
 public class HqUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -28,6 +27,8 @@ public class HqUserService {
         return hqUsers;
     }
 
+    // 초기 회원가입
+    @Transactional
     public void join(HqUserRegisterDto request) throws Exception{
         HqUser HQUser = HqUser.builder()
                 .loginId(request.getLoginId())

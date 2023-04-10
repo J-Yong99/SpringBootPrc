@@ -25,7 +25,7 @@ public class CustomerCenterInquiries {
     // 본사 ID
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "rsv_id")
+    @JoinColumn(name = "rsv_info_id")
     private RsvInfo rsvInfo;
     // 예약 ID nullable
 

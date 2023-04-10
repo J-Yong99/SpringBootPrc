@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                     .antMatchers(HttpMethod.POST,"/hqUser").permitAll()
+                    .antMatchers("/api/**").permitAll()
+                    .antMatchers("/toss/card/*").permitAll()
                     .antMatchers(HttpMethod.POST, "/reservation/**").hasRole("CUSTOMERA")
                     .antMatchers(HttpMethod.GET, "/reservation/**").permitAll()
                     .antMatchers(HttpMethod.PUT, "/reservation/**").hasRole("CUSTOMERA")

@@ -41,6 +41,9 @@ public class JwtTokenFilter extends AbstractAuthenticationProcessingFilter {
         EXCLUDED_PATHS.put("/customer1", Collections.singletonList(HttpMethod.POST));
         EXCLUDED_PATHS.put("/customer2", Collections.singletonList(HttpMethod.POST));
         EXCLUDED_PATHS.put("/device", Collections.singletonList(HttpMethod.POST));
+        EXCLUDED_PATHS.put("/api/recall", Collections.singletonList(HttpMethod.POST));
+        EXCLUDED_PATHS.put("/api/biztalk/token", Collections.singletonList(HttpMethod.GET));
+        EXCLUDED_PATHS.put("/toss/card/reqSuccess", Collections.singletonList(HttpMethod.GET));
     }
 
     @Override

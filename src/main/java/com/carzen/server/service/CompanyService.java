@@ -13,13 +13,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
     @Autowired
     private DeviceRepository deviceRepository;
 
+    @Transactional
     public void join(CompanyRegisterDto request) throws Exception{
         Company company = Company.builder()
                 .name(request.getName())

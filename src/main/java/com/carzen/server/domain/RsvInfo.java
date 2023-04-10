@@ -34,11 +34,6 @@ public class RsvInfo {
     private Customer customer;
     // 고객 ID
 
-    @ManyToOne
-    @JoinColumn(name = "payment_info_id")
-    private PaymentInfo paymentInfo;
-    // 결제 ID
-
     @Column(name = "rsv_status", nullable = false, unique = false)
     private String rsvStatus;
     // 예약 상태
@@ -52,7 +47,7 @@ public class RsvInfo {
     // 날짜
 
     @Column(name = "inspect_time", nullable = false, unique = false)
-    private Long inpectTime;
+    private Long inspectTime;
     // 점검 시간
 
     @Column(name = "customer_name", nullable = false, unique = false)

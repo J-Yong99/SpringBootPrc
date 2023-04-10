@@ -27,58 +27,59 @@ public class RsvInfoRepositoryCustomImpl implements RsvInfoRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<RsvInfo> searchRsv(Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDate, Long inspectTime, String customerName, String customerPhoneNumber) {
+    public List<RsvInfo> searchRsv(Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDateStart, LocalDate yearDateEnd, Long inspectTime, String customerName, String customerPhoneNumber, String carName) {
         QRsvInfo qRsvInfo = QRsvInfo.rsvInfo;
         QCarInd qCarInd = QCarInd.carInd;
         QCompany qCompany = QCompany.company;
         QCustomer qCustomer = QCustomer.customer;
-        QPaymentInfo qPaymentInfo = QPaymentInfo.paymentInfo;
+//        QPaymentInfo qPaymentInfo = QPaymentInfo.paymentInfo;
 
         return jpaQueryFactory.selectFrom(qRsvInfo)
                 .leftJoin(qRsvInfo.carInd, qCarInd)
                 .leftJoin(qRsvInfo.company, qCompany)
                 .leftJoin(qRsvInfo.customer, qCustomer)
-                .leftJoin(qRsvInfo.paymentInfo, qPaymentInfo)
+//                .leftJoin(qRsvInfo.paymentInfo, qPaymentInfo)
                 .where(
                         getIdExpression(qRsvInfo, id),
                         getCarIndIdExpression(qCarInd, carIndId),
                         getCompanyIdExpression(qCompany, companyId),
                         getCustomerIdExpression(qCustomer, customerId),
-                        getPaymentInfoIdExpression(qPaymentInfo, paymentInfoId),
+//                        getPaymentInfoIdExpression(qPaymentInfo, paymentInfoId),
                         getRsvStatusExpression(qRsvInfo, rsvStatus),
                         getInsStatusExpression(qRsvInfo, insStatus),
-                        getYearDateExpression(qRsvInfo, yearDate),
+                        getYearDateExpression(qRsvInfo, yearDateStart, yearDateEnd),
                         getInspectTimeExpression(qRsvInfo, inspectTime),
                         getCustomerNameExpression(qRsvInfo, customerName),
-                        getCustomerPhoneNumberExpression(qRsvInfo, customerPhoneNumber)
+                        getCustomerPhoneNumberExpression(qRsvInfo, customerPhoneNumber),
+                        getCarNameIdExpression(qCarInd, carName)
                 )
                 .fetch();
     }
     @Override
-    public Page<RsvInfo> searchRsvWithPaging(Pageable pageable, Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDate, Long inspectTime, String customerName, String customerPhoneNumber) {
+    public Page<RsvInfo> searchRsvWithPaging(Pageable pageable, Long id, Long carIndId, Long companyId, Long customerId, Long paymentInfoId, String rsvStatus, String insStatus, LocalDate yearDateStart, LocalDate yearDateEnd, Long inspectTime, String customerName, String customerPhoneNumber, String carName) {
         QRsvInfo qRsvInfo = QRsvInfo.rsvInfo;
         QCarInd qCarInd = QCarInd.carInd;
         QCompany qCompany = QCompany.company;
         QCustomer qCustomer = QCustomer.customer;
-        QPaymentInfo qPaymentInfo = QPaymentInfo.paymentInfo;
+//        QPaymentInfo qPaymentInfo = QPaymentInfo.paymentInfo;
 
         JPAQuery<RsvInfo> query = jpaQueryFactory.selectFrom(qRsvInfo)
                 .leftJoin(qRsvInfo.carInd, qCarInd)
                 .leftJoin(qRsvInfo.company, qCompany)
                 .leftJoin(qRsvInfo.customer, qCustomer)
-                .leftJoin(qRsvInfo.paymentInfo, qPaymentInfo)
                 .where(
                         getIdExpression(qRsvInfo, id),
                         getCarIndIdExpression(qCarInd, carIndId),
                         getCompanyIdExpression(qCompany, companyId),
                         getCustomerIdExpression(qCustomer, customerId),
-                        getPaymentInfoIdExpression(qPaymentInfo, paymentInfoId),
+//                        getPaymentInfoIdExpression(qPaymentInfo, paymentInfoId),
                         getRsvStatusExpression(qRsvInfo, rsvStatus),
                         getInsStatusExpression(qRsvInfo, insStatus),
-                        getYearDateExpression(qRsvInfo, yearDate),
+                        getYearDateExpression(qRsvInfo, yearDateStart, yearDateEnd),
                         getInspectTimeExpression(qRsvInfo, inspectTime),
                         getCustomerNameExpression(qRsvInfo, customerName),
-                        getCustomerPhoneNumberExpression(qRsvInfo, customerPhoneNumber)
+                        getCustomerPhoneNumberExpression(qRsvInfo, customerPhoneNumber),
+                        getCarNameIdExpression(qCarInd, carName)
                 );
 
         long totalCount = query.fetchCount();
@@ -111,7 +112,6 @@ public class RsvInfoRepositoryCustomImpl implements RsvInfoRepositoryCustom {
             }
         }
         query.orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]));
-
 
         return query.fetch();
     }
@@ -146,16 +146,21 @@ public class RsvInfoRepositoryCustomImpl implements RsvInfoRepositoryCustom {
 
 
 
-    private BooleanExpression getYearDateExpression(QRsvInfo qRsvInfo, LocalDate yearDate) {
-        if (yearDate != null) {
-            return qRsvInfo.yearDate.eq(yearDate);
+    private BooleanExpression getYearDateExpression(QRsvInfo qRsvInfo, LocalDate yearDateStart, LocalDate yearDateEnd) {
+        BooleanExpression yearDateExpression = null;
+        if (yearDateStart != null && yearDateEnd != null) {
+            yearDateExpression = qRsvInfo.yearDate.between(yearDateStart, yearDateEnd);
+        } else if (yearDateStart != null) {
+            yearDateExpression = qRsvInfo.yearDate.goe(yearDateStart);
+        } else if (yearDateEnd != null) {
+            yearDateExpression = qRsvInfo.yearDate.loe(yearDateEnd);
         }
-        return null;
+        return yearDateExpression;
     }
 
     private BooleanExpression getInspectTimeExpression(QRsvInfo qRsvInfo, Long inspectTime) {
         if (inspectTime != null) {
-            return qRsvInfo.inpectTime.eq(inspectTime);
+            return qRsvInfo.inspectTime.eq(inspectTime);
         }
         return null;
     }
@@ -170,6 +175,13 @@ public class RsvInfoRepositoryCustomImpl implements RsvInfoRepositoryCustom {
     private BooleanExpression getCustomerPhoneNumberExpression(QRsvInfo qRsvInfo, String customerPhoneNumber) {
         if (customerPhoneNumber != null) {
             return qRsvInfo.customerPhoneNumber.eq(customerPhoneNumber);
+        }
+        return null;
+    }
+
+    private BooleanExpression getCarNameIdExpression(QCarInd qCarInd, String carName) {
+        if (carName != null) {
+            return qCarInd.car.name.eq(carName);
         }
         return null;
     }

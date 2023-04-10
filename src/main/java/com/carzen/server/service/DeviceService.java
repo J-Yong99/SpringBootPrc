@@ -11,12 +11,12 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class DeviceService {
 
     @Autowired
     private DeviceRepository deviceRepository;
 
+    @Transactional
     public void join(DeviceRegisterDto request)throws Exception{
         Optional<Device> optionalDevice = deviceRepository.findBySerialNumber(request.getSerialNumber());
         Device device;
